@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
-app.use('/api',require('./routes/recrutador'))
+app.use('/api',require('./routes/index'))
 
 const port = process.env.PORT | 80
 
