@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const PopSchema = new mongoose.Schema({
-  Nome: {
+const Candidato = new mongoose.Schema({
+  nome: {
     type: String,
     required: true
   },
@@ -28,4 +28,4 @@ const PopSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Pop', PopSchema)
+module.exports = mongoose.model('Candidato', Candidato)

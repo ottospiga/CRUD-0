@@ -8,7 +8,7 @@ const { forwardAuthenticated } = require('../config/auth')
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login'))
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/dashboard',
+        successRedirect: '/api',
         failureRedirect: '/recrutador/login',
         failureFlash: true
     })(req, res, next)
