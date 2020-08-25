@@ -4,7 +4,7 @@ module.exports = {
           return next()
       } 
       req.flash('error_msg','Por favor, faça login')
-      res.redirect('/Recrutador/login')
+      res.redirect('/recrutador/login')
   },
   forwardAuthenticated: function(req, res, next) {
       if (!req.isAuthenticated()) {

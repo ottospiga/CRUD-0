@@ -33,7 +33,7 @@ app.use(express.urlencoded({extended:true}))
 
 //Routes
 app.use('/api',require('./routes/index'))
-//app.use('/recrutador', require('./routes/recrutador'))
+app.use('/recrutador', require('./routes/recrutador'))
 
 const PORT = process.env.PORT | 80
 //app.listen(PORT, console.log(`Server started on port ${PORT}`))

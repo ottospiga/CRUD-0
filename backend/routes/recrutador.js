@@ -16,7 +16,7 @@ router.post('/login', (req, res, next) => {
 
 router.get('/logout', (req, res) => {
     req.logout()
-    req.flash('success_msg', 'Você realizou logout')
+    res.json({'message':'Você realizou logout'})
     res.redirect('/recrutador/login')
 })
 
@@ -73,8 +73,8 @@ router.post('/register', (req, res) => {
                         newRecrutador.password = hash;
                         newRecrutador.save()
                             .then(hacker => {
-                                req.flash('success_msg', 'Conta criada com sucesso! Faça login.')
-                                res.redirect('/recrutador/login')
+                              res.json({'message':'Conta criada com sucesso! Faça login.'})  
+                              res.redirect('/recrutador/login')
                             })
                             .catch(err => console.log(err))
                     }))
@@ -118,16 +118,16 @@ router.post('/update', async (req, res) => {
             recrutador.password = hash;
             recrutador.save()
                 .then(recrutador => {
-                    req.flash('success_msg', 'Atualização bem sucedida!')
-                    res.redirect('/dashboard')
+                  res.json({'message':'Atualização bem sucedida!'}) 
+                  res.redirect('/dashboard')
                 })
                 .catch(err => console.log(err))
         }))
     }else{
       recrutador.save()
         .then(recrutador => {
-            req.flash('success_msg', 'Atualização bem sucedida')
-            res.redirect('/dashboard')
+          res.json({'message':'Atualização bem sucedida!'})
+          res.redirect('/dashboard')
         })
         .catch(err => console.log(err))
     }
