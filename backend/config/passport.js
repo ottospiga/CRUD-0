@@ -8,16 +8,16 @@ module.exports = function(passport) {
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       Recrutador.findOne({
         email: email
-      }).then(Recrutador => {
-        if (!Recrutador) {
+      }).then(recrutador => {
+        if (!recrutador) {
           return done(null, false, { message: 'Email ou senha incorretos' })
         }
 
         // Match password
-        bcrypt.compare(password, Recrutador.password, (err, isMatch) => {
+        bcrypt.compare(password, recrutador.password, (err, isMatch) => {
           if (err) throw err
           if (isMatch) {
-            return done(null, Recrutador)
+            return done(null, recrutador)
           } else {
             return done(null, false, { message: 'Email ou senha incorretos' })
           }
@@ -27,13 +27,13 @@ module.exports = function(passport) {
   )
 
 
-  passport.serializeUser(function(Recrutador, done) {
-    done(null, Recrutador.id)
+  passport.serializeUser(function(recrutador, done) {
+    done(null, recrutador.id)
   })
 
   passport.deserializeUser(function(id, done) {
-    Recrutador.findById(id, function(err, Recrutador) {
-      done(err, Recrutador)
+    Recrutador.findById(id, function(err, recrutador) {
+      done(err, recrutador)
     })
   })
 } 
