@@ -5,8 +5,9 @@ export const Container = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+  margin-top:100px;
 `;
 
 export const Title = styled.h1`
-  color: #009cde;
+  color: #fff;
 `;
