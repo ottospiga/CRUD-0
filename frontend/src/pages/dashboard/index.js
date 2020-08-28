@@ -1,21 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card, Form, Button, Table } from 'react-bootstrap';
 import { BsFillTrashFill, BsList  } from "react-icons/bs";
 import axios from 'axios';
+// import useAxios from 'axios-hooks';
 
 function Dashboard() {  
 
   const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = (data, e) => {
+    axios.post('http://localhost/api', {
+      name:data.name,
+      email:data.email,
+      idade:data.idade,
+      link:data.link,
+      c:data.c,
+      js:data.c,
+      node:data.node,
+      php:data.php,
+      msg:data.msg,
+      ionic:data.ionic,
+      angular:data.angular,
+      react:data.react,
+      laravel:data.laravel
+   })
+   .then(function (response, data) {
+     console.log(data);
+     console.log(response);
+     e.target.reset();
+   })
+   .catch(function (error) {
+     console.log(error);
+   });}
 
-  buscarCandidato(data) {
-    axios.get('http://localhost/dashboard')
-    .then(()=>{
-    console.log(data)
+   
+  useEffect(() => {
+    axios.get('http://localhost/api')
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   })
 
-  
 
   return (
     <> 
@@ -32,7 +60,7 @@ function Dashboard() {
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Nome</Form.Label>
-                    <Form.Control name="senha" type="name" placeholder="Nome" ref={register} />
+                    <Form.Control name="name" type="name" placeholder="Nome" ref={register} />
                   </Form.Group>
 
                   <Form.Group controlId="formBasicEmail">
@@ -51,7 +79,7 @@ function Dashboard() {
                   </Form.Group>
 
                   <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check inline label="C#" type="checkbox" placeholder="c#" name="c#" ref={register}/>
+                    <Form.Check inline label="C#" type="checkbox" placeholder="c" name="c" ref={register}/>
                     <Form.Check inline label="JS" type="checkbox" placeholder="js" name="js" ref={register}/> 
                     <Form.Check inline label="NodeJs" type="checkbox"  placeholder="node" name="node" ref={register}/> 
                     <Form.Check inline label="PHP" type="checkbox" placeholder="php" name="php" ref={register} /> 

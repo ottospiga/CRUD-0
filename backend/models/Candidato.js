@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const CandidatoSchema = new mongoose.Schema({
-  nome: {
+  name: {
     type: String,
     required: true
   },
@@ -17,10 +17,41 @@ const CandidatoSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  tec: {
-    type: Array,
-    "default": [],
-    required: true
+  c: {
+    type: Boolean,
+    // default: false
+  },
+  js: {
+    type: Boolean,
+    // default: false
+  },
+  node: {
+    type: Boolean,
+    // default: false
+  },
+  php: {
+    type: Boolean,
+    // default: false
+  },
+  msg: {
+    type: Boolean,
+    // default: false
+  },
+  ionic: {
+    type: Boolean,
+    // default: false
+  },
+  angular: {
+    type: Boolean,
+    default: false
+  },
+  react: {
+    type: Boolean,
+    // default: false
+  },
+  laravel: {
+    type: Boolean,
+    // default: false
   },
   created_at:{
     type:Date,
