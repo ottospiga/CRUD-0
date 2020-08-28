@@ -1,90 +1,54 @@
 import React from 'react';
-import { Container } from './styles';
+import { useForm } from "react-hook-form";
+import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 
-import { Form, Input, InputNumber, Button, Space, Card } from 'antd';
-import 'antd/dist/antd.css';
+function Registar() {  
 
-const layout = {
-  labelCol: {
-    span: 10,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const validateMessages = {
-  required: '${label} is required!',
-  types: {
-    email: '${label} is not validate email!',
-    number: '${label} is not a validate number!',
-  },
-  number: {
-    range: '${label} must be between ${min} and ${max}',
-  },
-};
-
-
-function Registar() {
-  
-  const onFinish = values => {
-    console.log(values);
-  };
+  const { register, handleSubmit, watch, errors } = useForm();
+  const onSubmit = data => console.log(data);
 
   return (
-    <Container>
+    <> 
+      <Container style={{ margin:30, width: '25rem' }} >
+        <Row>
+          <Col>
+            <Card>
+              <Card.Header as="h5">Registar</Card.Header>
+              <Card.Body>
 
-      <Space direction="vertical">
+                <Form onSubmit={handleSubmit(onSubmit)}>
+
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control name="email" type="email" placeholder="Enter email" ref={register} />
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control name="senha" type="password" placeholder="Password" ref={register} />
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password Confirmation</Form.Label>
+                    <Form.Control name="senhaConf" type="password" placeholder="Password" ref={register} />
+                  </Form.Group>
+
+                  <Button variant="primary" type="submit">
+                    Registrar
+                  </Button>
+                </Form>
+
+              </Card.Body>
+            </Card>
+          
+          </Col>
+
+        </Row>
+      </Container>
       
-      <Card title="Registar" style={{ width: 450 }}>
-       
-      <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-      
-      <Form.Item
-        name={['user', 'email']}
-        label="Email"
-        rules={[
-          {
-            type: 'email',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+      {/* {errors.exampleRequired && <span>This field is required</span>} */}       
 
-      <Form.Item
-        name={['user', 'name']}
-        label="Senha"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name={['passwordConfirmation', 'passwordConfirmation']}
-        label="Confirmação de senha"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
-          Registrar
-        </Button>
-      </Form.Item>
-    </Form>
-
-      </Card>
-    </Space>
-    </Container>
+    </>
   );
 }
 

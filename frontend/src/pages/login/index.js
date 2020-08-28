@@ -1,78 +1,50 @@
 import React from 'react';
-import { Container, Title } from './styles';
-
-import { Form, Input, Button, Checkbox, Space, Card } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import 'antd/dist/antd.css';
+// import { oi } from './styles';
+import { useForm } from "react-hook-form";
+import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 
 function Login() {  
 
-  const onFinish = values => {
-    console.log('Received values of form: ', values);
-  };
+  const { register, handleSubmit, watch, errors } = useForm();
+  const onSubmit = data => console.log(data);
 
   return (
-    <Container> 
-      <Space direction="vertical">
+    <> 
+      <Container style={{ margin:30, width: '25rem' }} >
+        <Row>
+          <Col>
+            <Card>
+              <Card.Header as="h5">Login</Card.Header>
+              <Card.Body>
+
+                <Form onSubmit={handleSubmit(onSubmit)}>
+
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control name="email" type="email" placeholder="Enter email" ref={register} />
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control name="senha" type="password" placeholder="Password" ref={register} />
+                  </Form.Group>
+
+                  <Button variant="primary" type="submit">
+                    Entrar
+                  </Button>
+                </Form>
+
+              </Card.Body>
+            </Card>
+          
+          </Col>
+
+        </Row>
+      </Container>
       
-      <Card title="Login" style={{ width: 450 }}>
-       
-        <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-      >
-        <Form.Item
-          name="E-mail"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
-        >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your Password!',
-            },
-          ]}
-        >
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Item>
-        <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+      {/* {errors.exampleRequired && <span>This field is required</span>} */}       
 
-          <a className="login-form-forgot" href="">
-            Forgot password
-          </a>
-        </Form.Item>
-
-        <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
-            Log in
-          </Button>
-          Or <a href="">register now!</a>
-        </Form.Item>
-      </Form>
-
-      </Card>
-    </Space>
-
-    </Container>
+    </>
   );
 }
 
