@@ -5,7 +5,7 @@ import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 
 function Login() {  
 
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = data => console.log(data);
 
   return (
